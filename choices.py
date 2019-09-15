@@ -46,3 +46,7 @@ class Choices(object):
 
     def get_sorted_ids(self):
         return self.sorted_ids
+
+    def get_choice_name_by_id(self, choice_id):
+        return self.choice_id_to_name[choice_id]
+
