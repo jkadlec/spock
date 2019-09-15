@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONPATH=/app/worker
+    volumes:
+      - ${CODE_ROOT}:/app/worker

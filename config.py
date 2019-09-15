@@ -1,0 +1,11 @@
+from os import getenv
+
+
+class Config(object):
+    APP_NAME = 'RPSSL'
+    TEST = False
+    RANDOM_GENERATOR_TYPE = getenv('RANDOM_GENERATOR_TYPE')
+    RANDOM_GENERATOR_URI = getenv('RANDOM_GENERATOR_URI')
+    RANDOM_GENERATOR_RL = int(getenv('RANDOM_GENERATOR_RL', '100'))  # per second
+
+    RULES = None
