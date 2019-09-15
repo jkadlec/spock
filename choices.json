@@ -1,0 +1,5 @@
+{ "rock": {"id": 1, "destroys": ["scissors", "lizard"]},
+  "paper": {"id": 2, "destroys": ["spock", "rock"]},
+  "scissors": {"id": 3, "destroys": ["paper", "lizard"]},
+  "spock": {"id": 4, "destroys": ["scissors", "rock"]},
+  "lizard": {"id": 5, "destroys": ["paper", "spock"]}}
