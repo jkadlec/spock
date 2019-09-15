@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Set, Tuple
 
 
 class Choices(object):
@@ -16,7 +16,7 @@ class Choices(object):
             raise ValueError('Wrong input dict')
 
         # Create combinations.
-        self.winning_combinations = set()
+        self.winning_combinations: Set[Tuple[int, int]] = set()
         for rule_owner, rules in rules.items():
             rules = rules['destroys']
             owner_id = self.name_to_choice_id[rule_owner]
@@ -47,6 +47,5 @@ class Choices(object):
     def get_sorted_ids(self):
         return self.sorted_ids
 
-    def get_choice_name_by_id(self, choice_id):
+    def get_choice_name_by_id(self, choice_id: int):
         return self.choice_id_to_name[choice_id]
-

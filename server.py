@@ -4,10 +4,10 @@ from flask import Flask
 from flask_restful import Api as RESTfulAPI
 
 from choices import Choices
-from resources import ChoiceResource, ChoicesResource
+from resources import ChoiceResource, ChoicesResource, RoundResource
 
 
-def _load_choices(path):
+def _load_choices(path: str):
     with open(path) as f:
         rules = load(f)
     return Choices(rules)
@@ -29,3 +29,4 @@ def init_app(app):
     rest_api = RESTfulAPI(app, catch_all_404s=True)
     rest_api.add_resource(ChoicesResource, '/api/v0.1/choices')
     rest_api.add_resource(ChoiceResource, '/api/v0.1/choice')
+    rest_api.add_resource(RoundResource, '/api/v0.1/play')  # This route should really be called 'round'.
