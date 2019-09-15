@@ -1,6 +1,6 @@
 FROM python:3.7.4-stretch
 
-RUN pip3 install Flask-RESTful==0.3.7 gunicorn==19.9.0
+RUN pip3 install Flask-RESTful==0.3.7 gunicorn==19.9.0 requests==2.22.0
 
 WORKDIR /app/worker
 

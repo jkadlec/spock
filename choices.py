@@ -1,17 +1,21 @@
-from typing import List, Dict
+from typing import Dict
 
 
 class Choices(object):
 
     def __init__(self, rules: Dict[str, Dict]):
         '''Prebuilds all possible winning combinations.'''
+
+        # create convenience mappings.
         self.choice_id_to_name = {v['id']: name for name, v in rules.items()}
         self.name_to_choice_id = {name: v['id'] for name, v in rules.items()}
+        self.sorted_ids = sorted(((k, v) for k, v in self.choice_id_to_name.items()), key=lambda _: _[0])
 
-        self.min_id, self.max_id = min(self.choice_id_to_name.keys()), max(self.choice_id_to_name.keys())
-        if self.min_id != 1:
+        min_id, self.max_id = min(self.choice_id_to_name.keys()), max(self.choice_id_to_name.keys())
+        if min_id != 1:
             raise ValueError('Wrong input dict')
 
+        # Create combinations.
         self.winning_combinations = set()
         for rule_owner, rules in rules.items():
             rules = rules['destroys']
@@ -21,6 +25,8 @@ class Choices(object):
                 self.winning_combinations.add((owner_id, rule_id))
 
     def decide_game(self, player_choice_id: int, computer_choice_id: int):
+        '''0 - tie, -1 player wind, 1 computer wins'''
+
         if player_choice_id == computer_choice_id:
             return 0
 
@@ -35,5 +41,8 @@ class Choices(object):
 
         return self.decide_game(player_choice_id, computer_choice_id)
 
-    def choice_range(self):
-        return self.min_id, self.max_id
+    def get_max_choice(self):
+        return self.max_id
+
+    def get_sorted_ids(self):
+        return self.sorted_ids
