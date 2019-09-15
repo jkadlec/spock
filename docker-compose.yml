@@ -9,5 +9,6 @@ services:
       - PYTHONPATH=/app/worker
     ports:
         - 8081:5000
+    env_file: server_settings.env
     volumes:
       - ${CODE_ROOT}:/app/worker

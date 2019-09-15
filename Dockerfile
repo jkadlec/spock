@@ -6,4 +6,4 @@ WORKDIR /app/worker
 
 COPY . /app/worker
 
-CMD gunicorn --log-level=info --bind 0.0.0.0:5000 -w 16 app:app
+CMD gunicorn --log-level=info --bind 0.0.0.0:5000 -w 4 app:app
