@@ -38,6 +38,9 @@ class RoundResource(Resource):
         if not request.json or 'player' not in request.json:
             return {'error': 'player choice not present'}, 400
         player_choice_id = request.json['player']
+        if not app.choices.choice_id_valid(player_choice_id):
+            return {'error': 'invalid choice'}, 400
+
         try:
             computer_choice_id = get_random_choice(app.choices.get_max_choice())
         except Exception as e:
@@ -52,4 +55,4 @@ class RoundResource(Resource):
         else:
             result = 'lose'
 
-        return {'results': result, 'player': player_choice_id, 'computer': computer_choice_id}
+        return {'results': result, 'player': player_choice_id, 'computer': computer_choice_id}, 200

@@ -9,5 +9,3 @@ class Config(object):
     RANDOM_GENERATOR_MAX_VAL = int(getenv('RANDOM_GENERATOR_MAX_VAL', '100'))
     RANDOM_GENERATOR_RL = int(getenv('RANDOM_GENERATOR_RL', '100'))  # per second
     RULES_FILE = '/app/worker/choices.json'
-
-    RULES = None

@@ -49,3 +49,6 @@ class Choices(object):
 
     def get_choice_name_by_id(self, choice_id: int):
         return self.choice_id_to_name[choice_id]
+
+    def choice_id_valid(self, choice_id: int):
+        return choice_id in self.choice_id_to_name
