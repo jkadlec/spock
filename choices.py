@@ -1,4 +1,4 @@
-from typing import Dict, Set, Tuple
+from typing import Dict, Set, Tuple, List
 
 
 class Choices(object):
@@ -24,7 +24,7 @@ class Choices(object):
             for rule_id in rule_ids:
                 self.winning_combinations.add((owner_id, rule_id))
 
-    def decide_game(self, player_choice_id: int, computer_choice_id: int):
+    def decide_game(self, player_choice_id: int, computer_choice_id: int) -> int:
         '''0 - tie, -1 player wind, 1 computer wins'''
 
         if player_choice_id == computer_choice_id:
@@ -35,20 +35,20 @@ class Choices(object):
         else:
             return 1
 
-    def decide_game_names(self, player_choice_name: str, computer_choice_name: str):
+    def decide_game_names(self, player_choice_name: str, computer_choice_name: str) -> int:
         player_choice_id = self.name_to_choice_id[player_choice_name]
         computer_choice_id = self.name_to_choice_id[computer_choice_name]
 
         return self.decide_game(player_choice_id, computer_choice_id)
 
-    def get_max_choice(self):
+    def get_max_choice(self) -> int:
         return self.max_id
 
-    def get_sorted_ids(self):
+    def get_sorted_ids(self) -> List[Tuple[int, str]]:
         return self.sorted_ids
 
-    def get_choice_name_by_id(self, choice_id: int):
+    def get_choice_name_by_id(self, choice_id: int) -> str:
         return self.choice_id_to_name[choice_id]
 
-    def choice_id_valid(self, choice_id: int):
+    def choice_id_valid(self, choice_id: int) -> bool:
         return choice_id in self.choice_id_to_name

@@ -1,3 +1,4 @@
+from typing import Dict, Tuple, List
 from functools import lru_cache
 from flask import current_app as app, request
 from flask_restful import Resource
@@ -8,7 +9,7 @@ from random_choice import get_random_choice
 class ChoicesResource(Resource):
 
     @lru_cache(maxsize=1)
-    def get(self):
+    def get(self) -> Tuple[List[Dict], int]:
         sorted_choices = app.choices.get_sorted_ids()
 
         ret = []
@@ -20,7 +21,7 @@ class ChoicesResource(Resource):
 
 class ChoiceResource(Resource):
 
-    def get(self):
+    def get(self) -> Tuple[Dict, int]:
         try:
             choice_id = get_random_choice(app.choices.get_max_choice())
         except Exception as e:
@@ -29,12 +30,12 @@ class ChoiceResource(Resource):
 
         choice_name = app.choices.get_choice_name_by_id(choice_id)
 
-        return {'id': choice_id, 'name': choice_name}
+        return {'id': choice_id, 'name': choice_name}, 200
 
 
 class RoundResource(Resource):
 
-    def post(self):
+    def post(self) -> Tuple[Dict, int]:
         if not request.json or 'player' not in request.json:
             return {'error': 'player choice not present'}, 400
         player_choice_id = request.json['player']

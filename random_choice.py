@@ -5,7 +5,7 @@ from requests import get
 seed()
 
 
-def get_random_choice(max_val, random_type=conf.RANDOM_GENERATOR_TYPE):
+def get_random_choice(max_val: int, random_type: str = conf.RANDOM_GENERATOR_TYPE) -> int:
     '''Returns random number from 1 to max_val.'''
 
     if random_type == 'local':

@@ -7,13 +7,13 @@ from choices import Choices
 from resources import ChoiceResource, ChoicesResource, RoundResource
 
 
-def _load_choices(path: str):
+def _load_choices(path: str) -> Choices:
     with open(path) as f:
         rules = load(f)
     return Choices(rules)
 
 
-def create_app(config):
+def create_app(config) -> Flask:
     app = Flask(config.APP_NAME)
     app.config.from_object(config)
     app.choices = _load_choices(config.RULES_FILE)
@@ -25,7 +25,7 @@ def create_app(config):
     return app
 
 
-def init_app(app):
+def init_app(app) -> None:
     rest_api = RESTfulAPI(app, catch_all_404s=True)
     rest_api.add_resource(ChoicesResource, '/api/v0.1/choices')
     rest_api.add_resource(ChoiceResource, '/api/v0.1/choice')
